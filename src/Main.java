@@ -1,16 +1,15 @@
 import java.io.File;
-import java.io.IOException;
 import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         Basket basket;
-        File textFile = new File("basket.txt");
+        File file = new File("basket.bin");
 
-        // проверяем существует ли файл basket.txt
-        if (textFile.exists()) {
+        // проверяем существует ли файл basket.bin
+        if (file.exists()) {
             // если существует, то восстанавливаем корзину из файла
-            basket = Basket.loadFromTxtFile(textFile);
+            basket = Basket.loadFromBinFile(file);
         } else {
             // если не существует, то создаем новую пустую корзину
             basket = new Basket(new String[] {"Картофель", "Капуста", "Свекла"}, new int[] {65, 40, 50});
@@ -37,7 +36,7 @@ public class Main {
             int amount = Integer.parseInt(parts[1]); // количество продукта
 
             basket.addToCart(productNum, amount);
-            basket.saveTxt(textFile);
+            basket.saveBin(file);
         }
 
         basket.printCart();
